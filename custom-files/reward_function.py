@@ -4,6 +4,7 @@ def reward_function(params):
     '''
     
     # Read input parameters
+    reward = 1e-3
     distance_from_center = params['distance_from_center']
     track_width = params['track_width']
     steering = abs(params['steering_angle']) # Only need the absolute steering angle
@@ -13,6 +14,7 @@ def reward_function(params):
     marker_2 = 0.25 * track_width
     marker_3 = 0.5 * track_width
 
+    
     # Give higher reward if the car is closer to center line and vice versa
     if distance_from_center <= marker_1:
         reward = 1
@@ -42,7 +44,6 @@ def reward_function(params):
 
     # Initialize reward with a small number but not zero
     # because zero means off-track or crashed
-    reward = 1e-3
 
     # Reward if the agent stays inside the two borders of the track
     if all_wheels_on_track and (0.5 * track_width - distance_from_center) >= 0.05:
