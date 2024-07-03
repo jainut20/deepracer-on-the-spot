@@ -6,10 +6,6 @@ def reward_function(params):
     DIRECTION_THRESHOLD = 10.0
     ABS_STEERING_THRESHOLD = 30
 
-
-
-
-
     ########################
     ### Input parameters ###
     ########################
