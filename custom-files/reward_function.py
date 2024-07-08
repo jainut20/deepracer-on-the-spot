@@ -33,6 +33,7 @@ def reward_function(params):
     reward = distance_from_center_reward(reward, track_width, distance_from_center)
     reward = direction_reward(reward, waypoints, closest_waypoints, heading)
     reward = step_reward(reward, steps, progress, all_wheels_on_track)
+    reward = orientation_towards_next_waypoint_reward(reward, waypoints, closest_waypoints, heading, x, y)
     reward = speed_reward(reward, speed, steering)
     
     # Ensure reward is within the range
@@ -93,4 +94,24 @@ def speed_reward(current_reward, speed, steering):
         current_reward += speed
     else:
         current_reward *= 0.8
+    return current_reward
+
+# Not used at the moment
+def orientation_towards_next_waypoint_reward(current_reward, waypoints, closest_waypoints, heading, x, y):
+    rabbit = [0,0]
+    pointing = [0,0]
+    
+    rabbit = waypoints[closest_waypoints[1]]
+    radius = math.hypot(x - rabbit[0], y - rabbit[1])
+
+    pointing[0] = x + (radius * math.cos(heading))
+    pointing[1] = y + (radius * math.sin(heading))
+
+    vector_delta = math.hypot(pointing[0] - rabbit[0], pointing[1] - rabbit[1])
+
+    if vector_delta == 0:
+        current_reward+= 1
+    else:
+        current_reward += (1- (vector_delta / (radius * 2)))
+    
     return current_reward
