@@ -3,7 +3,7 @@ import math
 MAX_REWARD = 1e2
 MIN_REWARD = 1e-3
 DIRECTION_THRESHOLD = 10.0
-ABS_STEERING_THRESHOLD = 15
+ABS_STEERING_THRESHOLD = 30
     
 def reward_function(params):
     '''
