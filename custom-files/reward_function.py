@@ -79,26 +79,11 @@ def reward_function(params):
         
         return current_reward
 
-    def reward_sp(current_reward, params):
-        
-        a = [
-            (0.5, -30), (0.5, -15), (0.5, 0), (0.5, 15), (0.5, 30),
-            (1.0, -30), (1.0, -15), (1.0, 0), (1.0, 15), (1.0, 30),
-            (2.0, -15), (2.0, 0), (2.0, 15)
-        ]
-        
-        speed = params['speed']
-        steering = params['steering_angle']
-
-        if (speed, steering) in a:
-            current_reward += 1.0
-
-        return current_reward
 
     reward = distance_from_center_reward(reward, track_width, distance_from_center)
     reward = direction_reward(reward, waypoints, closest_waypoints, heading)
     reward = step_reward(reward, steps, progress)
     reward = orientation_towards_next_waypoint_reward(reward, waypoints, closest_waypoints, heading, x, y)
-    reward = reward_sp(reward, params)
+    # reward = reward_sp(reward, params)
 
     return float(reward)
