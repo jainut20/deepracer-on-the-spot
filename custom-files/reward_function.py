@@ -34,7 +34,7 @@ def reward_function(params):
     reward = direction_reward(reward, waypoints, closest_waypoints, heading)
     reward = step_reward(reward, steps, progress, all_wheels_on_track)
     reward = orientation_towards_next_waypoint_reward(reward, waypoints, closest_waypoints, heading, x, y)
-    reward = speed_reward(reward, speed, steering)
+    # reward = speed_reward(reward, speed, steering)
     
     # Ensure reward is within the range
     # reward = max(MIN_REWARD, min(MAX_REWARD, reward))
@@ -88,13 +88,13 @@ def step_reward(current_reward, steps, progress, all_wheels_on_track):
         current_reward = MIN_REWARD
     return current_reward
 
-def speed_reward(current_reward, speed, steering):
-    # Encourage higher speeds but penalize for too high steering angles
-    if speed > 1.0 and steering < ABS_STEERING_THRESHOLD:
-        current_reward += speed
-    else:
-        current_reward *= 0.8
-    return current_reward
+# def speed_reward(current_reward, speed, steering):
+#     # Encourage higher speeds but penalize for too high steering angles
+#     if speed > 1.0 and steering < ABS_STEERING_THRESHOLD:
+#         current_reward += speed
+#     else:
+#         current_reward *= 0.8
+#     return current_reward
 
 # Not used at the moment
 def orientation_towards_next_waypoint_reward(current_reward, waypoints, closest_waypoints, heading, x, y):
