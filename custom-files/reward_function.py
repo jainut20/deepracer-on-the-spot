@@ -37,7 +37,7 @@ def reward_function(params):
     # reward = speed_reward(reward, speed, steering)
     
     # Ensure reward is within the range
-    # reward = max(MIN_REWARD, min(MAX_REWARD, reward))
+    reward = max(MIN_REWARD, min(MAX_REWARD, reward))
 
     return float(reward)
 
